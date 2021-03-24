@@ -150,6 +150,16 @@ func (d DotSql) ExecContext(ctx context.Context, db ExecerContext, name string, 
 	return db.ExecContext(ctx, query, args...)
 }
 
+// ExecTxContext is a wrapper for transactions ExecContext function
+func (d DotSql) ExecTxContext(ctx context.Context, tx *sql.Tx, db ExecerContext, name string, args ...interface{}) (sql.Result, error) {
+	query, err := d.lookupQuery(name)
+	if err != nil {
+		return nil, err
+	}
+
+	return tx.ExecContext(ctx, query, args...)
+}
+
 // Raw returns the query, everything after the --name tag
 func (d DotSql) Raw(name string) (string, error) {
 	return d.lookupQuery(name)
