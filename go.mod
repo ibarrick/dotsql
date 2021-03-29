@@ -1,4 +1,4 @@
-module github.com/gchaincl/dotsql
+module github.com/ibarrick/dotsql
 
 go 1.12
 
